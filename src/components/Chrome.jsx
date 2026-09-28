@@ -89,7 +89,7 @@ export function UtilityBar() {
             <b>Closed</b>
           ) : (
             <b>
-              <span className="visually-hidden">Time remaining until January 9, 2026: </span>
+              <span className="visually-hidden">Time remaining until January 8, 2027: </span>
               {t.days}d {String(t.hours).padStart(2, '0')}h {String(t.minutes).padStart(2, '0')}m
             </b>
           )}
@@ -189,7 +189,7 @@ export function Marquee() {
     'NISCAA member since 1972',
   ]
   return (
-    <div className="marquee on-dark" aria-label="School facts">
+    <div className="marquee on-dark" aria-hidden="true">
       <div className="marquee__track">
         {[0, 1].map((group) => (
           <div className="marquee__group" key={group} aria-hidden={group === 1 ? 'true' : undefined}>
@@ -249,7 +249,7 @@ export function Footer() {
           </div>
         </div>
         <div className="footer__sub">
-          <p>© 2026 Northfield Academy. Accredited by NAIS and the State of Oregon.</p>
+          <p>© 2027 Northfield Academy. Accredited by NAIS and the State of Oregon.</p>
           <div className="footer__legal">
             <a href="#top">Privacy policy</a>
             <a href="#top">Terms</a>

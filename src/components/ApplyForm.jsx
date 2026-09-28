@@ -1,5 +1,5 @@
-import { useRef, useState } from 'react'
-import { formSteps, gradYears, relationshipOptions } from '../data/content.js'
+import { cloneElement, useId, useRef, useState } from 'react'
+import { formSteps, relationshipOptions } from '../data/content.js'
 import { Icon } from './Chrome.jsx'
 
 const initial = {
@@ -8,7 +8,7 @@ const initial = {
   birthDate: '',
   currentSchool: '',
   grade: '',
-  entryTerm: 'Fall 2026',
+  entryTerm: 'Fall 2027',
   relationship: relationshipOptions[0],
   email: '',
   phone: '',
@@ -59,11 +59,9 @@ export default function ApplyForm() {
   const [step, setStep] = useState(0)
   const [data, setData] = useState(initial)
   const [errors, setErrors] = useState({})
-  const [alert, setAlert] = useState(null)
   const [status, setStatus] = useState('idle')
   const [over, setOver] = useState(false)
   const [ref, setRef] = useState(null)
-  const formRef = useRef(null)
   const headingRef = useRef(null)
 
   const set = (key) => (e) => {
@@ -74,7 +72,6 @@ export default function ApplyForm() {
 
   const goStep = (next) => {
     setStep(next)
-    setAlert(null)
     setErrors({})
     requestAnimationFrame(() => headingRef.current?.focus())
   }
@@ -84,7 +81,6 @@ export default function ApplyForm() {
     const found = validate(step, data)
     if (Object.keys(found).length) {
       setErrors(found)
-      setAlert(found)
       const first = document.querySelector('[aria-invalid="true"]')
       first?.focus()
       return
@@ -94,7 +90,6 @@ export default function ApplyForm() {
       return
     }
     setStatus('sending')
-    setAlert(null)
     setTimeout(() => {
       setStatus('sent')
       setRef(`NFA-${Math.random().toString(36).slice(2, 6).toUpperCase()}-${new Date().getFullYear()}`)
@@ -184,7 +179,7 @@ export default function ApplyForm() {
                 </button>
               </div>
             ) : (
-              <form ref={formRef} noValidate onSubmit={next}>
+              <form noValidate onSubmit={next}>
                 <div className="form__head">
                   <p className="form__step">Step {step + 1} — {formSteps[step].label}</p>
                   <h3 ref={headingRef} tabIndex={-1}>
@@ -205,7 +200,7 @@ export default function ApplyForm() {
                   </p>
                 </div>
 
-                {alert && (
+                {errorCount > 0 && (
                   <div className="form__alert" role="alert" id="form-errors">
                     <div>
                       <b>
@@ -573,14 +568,24 @@ export default function ApplyForm() {
 }
 
 function Field({ label, error, hint, required, className = '', children }) {
+  const id = useId()
+  const control = cloneElement(children, {
+    id,
+    name: children.props.name ?? id,
+    'aria-describedby': error ? `${id}-error` : undefined,
+  })
   return (
     <div className={`field ${className}`}>
-      <label className="field__label" htmlFor={children.props.id || undefined}>
+      <label className="field__label" htmlFor={id}>
         {label} {required && <span aria-hidden="true">*</span>}
       </label>
       {hint && <span className="field__hint">{hint}</span>}
-      {children}
-      {error && <p className="error-text">{error}</p>}
+      {control}
+      {error && (
+        <p className="error-text" id={`${id}-error`}>
+          {error}
+        </p>
+      )}
     </div>
   )
 }

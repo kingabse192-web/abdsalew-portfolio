@@ -35,8 +35,8 @@ export function Hero() {
   const [checked, setChecked] = useState([])
   const R = 34
   const C = 2 * Math.PI * R
-  const progress = 0.42
   const done = checked.length
+  const progress = done / checklist.length
 
   return (
     <section className="hero" id="top">
@@ -44,8 +44,8 @@ export function Hero() {
         <div>
           <Reveal>
             <span className="hero__badge">
-              <span className="pill--open pill__dot" style={{ width: 7, height: 7, borderRadius: 99, background: 'var(--moss)' }} />
-              Applications open for Fall 2026
+              <span className="hero__badgeDot" aria-hidden="true" />
+              Applications open for Fall 2027
             </span>
             <h1>
               Sixteen hundred hours of school, and <em>eight hundred</em> of them are ours to shape.
@@ -99,11 +99,19 @@ export function Hero() {
                       strokeDashoffset={C * (1 - progress)}
                     />
                   </svg>
-                  <span className="ring__value">{done}/4</span>
+                  <span className="ring__value">
+                    {done}/{checklist.length}
+                  </span>
                 </div>
                 <div className="ring__copy">
                   <b>Documents to gather</b>
-                  <p>Most families already have these at home. Tick them off as you go.</p>
+                  <p>
+                    {done === 0
+                      ? 'Most families already have these at home. Tick them off as you go.'
+                      : done === checklist.length
+                        ? 'All four gathered. You are ready to apply.'
+                        : `${checklist.length - done} left. Most families already have these at home.`}
+                  </p>
                 </div>
               </div>
 
@@ -204,31 +212,41 @@ export function Programs() {
             const isOpen = open === p.id
             return (
               <article className="prog" key={p.id}>
-                <h3 style={{ display: 'contents' }}>
+                <h3 className="prog__h">
                   <button
                     className="prog__btn"
                     aria-expanded={isOpen}
                     aria-controls={`panel-${p.id}`}
                     onClick={() => setOpen(isOpen ? null : p.id)}
                   >
-                    <span className="prog__idx">{String(i + 1).padStart(2, '0')}</span>
+                    <span className="prog__idx" aria-hidden="true">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
                     <span>
                       <span className="prog__title">
                         <span>{p.title}</span>
                         <span className="tag">{p.grades}</span>
                       </span>
-                      <span className="prog__desc">{p.body}</span>
+                      <span className="prog__desc" aria-hidden="true">
+                        {p.body}
+                      </span>
                     </span>
                     <span className="prog__right">
                       {p.seats > 0 && (
-                        <span className="prog__seats">
+                        <span className="prog__seats" aria-hidden="true">
                           <b>{p.seats}</b> of {p.capacity} seats open
                         </span>
                       )}
                       {p.seats === 0 && <span className="tag">Waitlist only</span>}
-                      <span className="prog__chev">
+                      <span className="prog__chev" aria-hidden="true">
                         <Icon name="chevron" size={14} />
                       </span>
+                    </span>
+                    <span className="visually-hidden">
+                      {p.seats > 0
+                        ? `${p.seats} of ${p.capacity} seats open. `
+                        : 'Waitlist only. '}
+                      {isOpen ? 'Hide details' : 'Show details'}
                     </span>
                   </button>
                 </h3>
@@ -524,7 +542,7 @@ export function Faq() {
             const isOpen = open === i
             return (
               <div className="faq__item" key={item.q}>
-                <h3 style={{ margin: 0 }}>
+                <h3 className="faq__h">
                   <button
                     className="faq__btn"
                     aria-expanded={isOpen}

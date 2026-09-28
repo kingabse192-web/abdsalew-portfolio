@@ -7,7 +7,7 @@ export const school = {
   email: 'admissions@northfield.example',
 }
 
-export const deadline = new Date('2026-01-09T17:00:00-08:00')
+export const deadline = new Date('2027-01-08T17:00:00-08:00')
 
 export const nav = [
   { label: 'How it works', href: '#enroll', num: '01' },
@@ -203,58 +203,58 @@ export const aid = {
 
 export const dates = [
   {
-    when: 'Oct 6',
-    full: 'October 6, 2025',
+    when: 'Oct 5',
+    full: 'October 5, 2026',
     title: 'Open house for prospective families',
     note: 'Campus tour 10am, information sessions at 11am and 2pm',
     status: 'closed',
   },
   {
-    when: 'Nov 1',
-    full: 'November 1, 2025',
+    when: 'Nov 2',
+    full: 'November 2, 2026',
     title: 'Applications open',
     note: 'Rolling review begins; early decisions for complete files',
     status: 'open',
   },
   {
-    when: 'Dec 12',
-    full: 'December 12, 2025',
+    when: 'Dec 11',
+    full: 'December 11, 2026',
     title: 'Financial aid documents due',
     note: 'FAFSA or the Northfield aid form, plus prior-year tax return',
     status: 'soon',
   },
   {
-    when: 'Jan 9',
-    full: 'January 9, 2026',
+    when: 'Jan 8',
+    full: 'January 8, 2027',
     title: 'Applications and financial aid due',
     note: 'Everything must be submitted by 5:00pm Pacific',
     status: 'open',
   },
   {
-    when: 'Jan 12',
-    full: 'January 12–16, 2026',
+    when: 'Jan 11',
+    full: 'January 11–15, 2027',
     title: 'Family interviews',
     note: 'We contact you within 48 hours of your application to schedule',
     status: 'soon',
   },
   {
-    when: 'Jan 30',
-    full: 'January 30, 2026',
+    when: 'Jan 29',
+    full: 'January 29, 2027',
     title: 'Decisions released',
     note: 'A single release time for every applicant, by email and portal',
     status: 'soon',
   },
   {
-    when: 'Mar 4',
-    full: 'March 4, 2026',
+    when: 'Mar 5',
+    full: 'March 5, 2027',
     title: 'Enrollment contracts due',
     note: 'Deposit and signed contract confirm your place',
     status: 'soon',
   },
   {
-    when: 'Aug 25',
-    full: 'August 25, 2026',
-    title: 'First day of the Fall 2026 year',
+    when: 'Aug 24',
+    full: 'August 24, 2027',
+    title: 'First day of the Fall 2027 year',
     note: 'Orientation for new families the week before',
     status: 'soon',
   },
@@ -267,7 +267,7 @@ export const faq = [
   },
   {
     q: 'What is the deadline for applying?',
-    a: 'Applications and financial aid documents are due January 9, 2026 at 5:00pm Pacific. Files completed before November 15 are eligible for an early decision, released the same day as regular decisions.',
+    a: 'Applications and financial aid documents are due January 8, 2027 at 5:00pm Pacific. Files completed before November 16 are eligible for an early decision, released the same day as regular decisions.',
   },
   {
     q: 'Do you offer financial aid?',
@@ -341,5 +341,4 @@ export const formSteps = [
   { id: 'review', label: 'Review' },
 ]
 
-export const gradYears = ['2020', '2021', '2022', '2023', '2024', '2025', '2026']
 export const relationshipOptions = ['Parent or legal guardian', 'Stepparent', 'Legal guardian', 'Self']
