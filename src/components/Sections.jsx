@@ -1,5 +1,17 @@
 import { useState } from 'react'
-import { aid, checklist, dates, faq, heroStats, people, programs, programGroups, steps, tuitionRows } from '../data/content.js'
+import {
+  aid,
+  checklist,
+  dates,
+  extras,
+  faq,
+  heroStats,
+  people,
+  programs,
+  programGroups,
+  steps,
+  tuitionRows,
+} from '../data/content.js'
 import { Icon } from './Chrome.jsx'
 import { useReveal } from '../hooks/index.js'
 
@@ -289,39 +301,31 @@ export function Programs() {
 }
 
 export function Tuition() {
-  const [residency, setResidency] = useState(0)
   const [plan, setPlan] = useState('annual')
-  const key = residency === 0 ? 'tuition' : 'other'
-  const money = (n) => '$' + n.toLocaleString('en-US')
+  const per = (n) => (plan === 'annual' ? n : Math.round(n / 10))
+  const money = (n) => '$' + per(n).toLocaleString('en-US')
+
+  const feesTotal = tuitionRows.fees.reduce((sum, [, full]) => sum + full, 0)
+  const firstYear = tuitionRows.tuition[0][1] + feesTotal
+  const firstYearAid = tuitionRows.tuition[0][2] + 640
 
   return (
     <section className="section" id="tuition">
       <div className="shell">
         <SectionHead
           eyebrow="Tuition & financial aid"
-          title="Published numbers. No call required."
-          lede="Every family pays the same for the same program. Aid is assessed on need, not on whether a family can pay first."
+          title="One number, published."
+          lede="Every family pays the same tuition in every grade, Pre-K through twelve. Aid is assessed on need, not on whether a family can pay first."
         />
 
         <div className="tuition">
           <div>
             <div className="controls">
               <div className="field">
-                <span className="field__label" id="residency-label">
-                  Tuition for
+                <span className="field__label" id="plan-label">
+                  Show tuition as
                 </span>
-                <div className="segmented" role="group" aria-labelledby="residency-label">
-                  <button aria-pressed={residency === 0} onClick={() => setResidency(0)}>
-                    Oregon resident
-                  </button>
-                  <button aria-pressed={residency === 1} onClick={() => setResidency(1)}>
-                    Non-resident
-                  </button>
-                </div>
-              </div>
-              <div className="field">
-                <span className="field__label">Show as</span>
-                <div className="segmented" role="group">
+                <div className="segmented" role="group" aria-labelledby="plan-label">
                   <button aria-pressed={plan === 'annual'} onClick={() => setPlan('annual')}>
                     Annual
                   </button>
@@ -330,49 +334,64 @@ export function Tuition() {
                   </button>
                 </div>
               </div>
+              <p className="field__hint" style={{ paddingBottom: '0.75rem' }}>
+                {plan === 'annual'
+                  ? '2026–27 school year, billed in two installments.'
+                  : 'A ten-payment plan, July through April, at no extra cost.'}
+              </p>
             </div>
 
             <table className="tuition__table">
               <caption>
-                {residency === 0
-                  ? '2025–26 rates for Oregon residents. Monthly figures are a ten-payment plan.'
-                  : '2025–26 non-resident rates. Monthly figures are a ten-payment plan.'}
+                Tuition is identical across every grade. The aid column shows what a family who
+                applies and qualifies typically pays.
               </caption>
               <thead>
                 <tr>
                   <th scope="col">Grade</th>
-                  <th scope="col">{plan === 'annual' ? 'Annual' : 'Per month'}</th>
+                  <th scope="col">{plan === 'annual' ? 'Annual tuition' : 'Per month'}</th>
                   <th scope="col">With aid, typical</th>
                 </tr>
               </thead>
               <tbody>
-                {tuitionRows[key].map(([name, full, aided]) => (
+                {tuitionRows.tuition.map(([name, full, aided]) => (
                   <tr key={name}>
                     <td>{name}</td>
-                    <td>{money(plan === 'annual' ? full : Math.round(full / 10))}</td>
-                    <td>{money(plan === 'annual' ? aided : Math.round(aided / 10))}</td>
+                    <td>{money(full)}</td>
+                    <td>{money(aided)}</td>
                   </tr>
                 ))}
                 {tuitionRows.fees.map(([name, full, aided]) => (
                   <tr key={name}>
                     <td>{name}</td>
-                    <td>{money(plan === 'annual' ? full : Math.round(full / 10))}</td>
-                    <td>{money(plan === 'annual' ? aided : Math.round(aided / 10))}</td>
+                    <td>{money(full)}</td>
+                    <td>{money(aided)}</td>
                   </tr>
                 ))}
-                {tuitionRows[key].map(([name, full, aided]) => (
-                  <tr key={`total-${name}`}>
-                    <td>Total, {name.replace('Grades ', 'gr. ').replace('Pre-K (full day)', 'pre-K')}</td>
-                    <td>{money(plan === 'annual' ? full + 1840 : Math.round((full + 1840) / 10))}</td>
-                    <td>{money(plan === 'annual' ? aided + 640 : Math.round((aided + 640) / 10))}</td>
-                  </tr>
-                ))}
+                <tr>
+                  <td>Total, first year</td>
+                  <td>{money(firstYear)}</td>
+                  <td>{money(firstYearAid)}</td>
+                </tr>
               </tbody>
             </table>
+
+            <div className="extras">
+              <p className="extras__title">Optional, if you need them</p>
+              <ul>
+                {extras.map(([name, cost]) => (
+                  <li key={name}>
+                    <span>{name}</span>
+                    <b>{plan === 'annual' ? '$' + cost.toLocaleString('en-US') : '$' + Math.round(cost / 10) + ' / mo'}</b>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
             <p className="tuition__note">
-              Figures assume the optional meals plan. Aid column reflects the median award among
-              families who applied and were assessed. Sibling discounts of 10% apply to the second
-              child and 20% to the third.
+              Aid column reflects the median award among families who applied and were assessed —
+              not a guarantee. Sibling discounts of 10% apply to the second child and 20% to the
+              third. Payment plans are available to every family and carry no interest.
             </p>
           </div>
 

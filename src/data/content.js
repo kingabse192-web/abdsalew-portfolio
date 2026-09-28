@@ -173,30 +173,36 @@ export const programs = [
   },
 ]
 
+// Flat tuition across every grade. The third value is the typical cost for a
+// family that applies for and receives aid.
+export const TUITION = 100000
+export const TUITION_WITH_AID = 38000
+
 export const tuitionRows = {
   tuition: [
-    ['Pre-K (full day)', 18900, 14180],
-    ['Kindergarten', 21400, 16050],
-    ['Grades 1–5', 22800, 17100],
-    ['Grades 6–8', 24500, 18380],
-    ['Grades 9–12', 26900, 20180],
+    ['Pre-K (full day)', TUITION, TUITION_WITH_AID],
+    ['Kindergarten', TUITION, TUITION_WITH_AID],
+    ['Grades 1–5', TUITION, TUITION_WITH_AID],
+    ['Grades 6–8', TUITION, TUITION_WITH_AID],
+    ['Grades 9–12', TUITION, TUITION_WITH_AID],
   ],
   fees: [
-    ['Enrollment fee (one-time)', 1200, 1200],
+    ['Enrollment fee (one-time)', 1200, 0],
     ['Technology & materials', 640, 640],
   ],
-  other: [
-    ['Meals plan (optional, annual)', 1180, 1180],
-    ['Bus transport (annual)', 760, 760],
-  ],
 }
+
+export const extras = [
+  ['Meals plan (optional, annual)', 1180],
+  ['Bus transport (annual)', 760],
+]
 
 export const aid = {
   assessed: 32,
   needMet: 88,
   stats: [
     ['Families applying for aid', '61'],
-    ['Average grant awarded', '$14,900'],
+    ['Average grant awarded', '$62,000'],
     ['Work aid (jobs on campus)', '$3,200'],
   ],
 }
