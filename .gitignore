@@ -12,3 +12,6 @@ yarn-error.log*
 .vscode/*
 !.vscode/extensions.json
 .idea
+
+# vite temp files
+vite.config.js.timestamp-*.mjs
