@@ -1,5 +1,19 @@
 # Northfield Academy — Admissions Landing Page
 
+[![Live demo](https://img.shields.io/badge/live%20demo-visit%20site-12362a?style=flat-square)](https://kingabse192-web.github.io/northfield-academy-enroll/)
+[![Deploy](https://github.com/kingabse192-web/northfield-academy-enroll/actions/workflows/deploy.yml/badge.svg)](https://github.com/kingabse192-web/northfield-academy-enroll/actions/workflows/deploy.yml)
+[![React](https://img.shields.io/badge/react-18-61dafb?style=flat-square&logo=react&logoColor=61dafb)](https://react.dev)
+[![Vite](https://img.shields.io/badge/vite-5-646cff?style=flat-square&logo=vite&logoColor=646cff)](https://vitejs.dev)
+
+### ▶️ Live demo
+
+**https://kingabse192-web.github.io/northfield-academy-enroll/**
+
+Deployed automatically to GitHub Pages on every push to `main`. Form submission is simulated
+client-side, so the multi-step flow, validation, and success state are all safe to click through.
+
+---
+
 A landing page for school registration, built with React and Vite. No UI framework, no
 component library — just a hand-built design system in CSS custom properties.
 
@@ -45,15 +59,17 @@ npm run preview  # serve the production build locally
 ## Deploying to GitHub Pages
 
 A workflow is included at `.github/workflows/deploy.yml`. It builds on every push to `main`
-and publishes `dist/` to GitHub Pages.
+and publishes `dist/` to GitHub Pages. Pages is already configured to use the workflow as its
+source, so a push is all it takes.
 
-1. Push this repository to GitHub.
-2. In the repo, go to **Settings → Pages**.
-3. Under **Build and deployment**, set **Source** to **GitHub Actions**.
-4. Push again, or run the `Deploy to GitHub Pages` workflow manually from the Actions tab.
+1. `git push`
+2. Watch the run in the [Actions tab](https://github.com/kingabse192-web/northfield-academy-enroll/actions/workflows/deploy.yml).
+3. The site updates at https://kingabse192-web.github.io/northfield-academy-enroll/
 
-The site will be live at `https://<your-username>.github.io/<repo-name>/`. The Vite config
-already sets `base: './'`, so a project-site URL works without further changes.
+The Vite config sets `base: './'`, so the project-site URL works without further changes.
+
+If you fork this, set **Settings → Pages → Build and deployment → Source** to **GitHub Actions**
+once, then update the live demo links above.
 
 ## Project structure
 
