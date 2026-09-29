@@ -1,25 +1,26 @@
-# Northfield Academy — Admissions Landing Page
+# abdsalew-portfolio
 
-[![Live demo](https://img.shields.io/badge/live%20demo-visit%20site-12362a?style=flat-square)](https://kingabse192-web.github.io/northfield-academy-enroll/)
-[![Deploy](https://github.com/kingabse192-web/northfield-academy-enroll/actions/workflows/deploy.yml/badge.svg)](https://github.com/kingabse192-web/northfield-academy-enroll/actions/workflows/deploy.yml)
+**School registration landing page** — React + Vite, hand-built design system, and a
+four-step application form with real validation.
+
+[![Live demo](https://img.shields.io/badge/live%20demo-visit%20site-12362a?style=flat-square)](https://kingabse192-web.github.io/abdsalew-portfolio/)
+[![Deploy](https://github.com/kingabse192-web/abdsalew-portfolio/actions/workflows/deploy.yml/badge.svg)](https://github.com/kingabse192-web/abdsalew-portfolio/actions/workflows/deploy.yml)
 [![React](https://img.shields.io/badge/react-18-61dafb?style=flat-square&logo=react&logoColor=61dafb)](https://react.dev)
 [![Vite](https://img.shields.io/badge/vite-5-646cff?style=flat-square&logo=vite&logoColor=646cff)](https://vitejs.dev)
 
 ### ▶️ Live demo
 
-**https://kingabse192-web.github.io/northfield-academy-enroll/**
+**https://kingabse192-web.github.io/abdsalew-portfolio/**
 
 Deployed automatically to GitHub Pages on every push to `main`. Form submission is simulated
 client-side, so the multi-step flow, validation, and success state are all safe to click through.
 
 ---
 
-A landing page for school registration, built with React and Vite. No UI framework, no
-component library — just a hand-built design system in CSS custom properties.
-
-**Northfield Academy** is a fictional independent K–12 school in Portland, Oregon, used here as
-realistic content. All copy is in `src/data/content.js` and can be swapped for a real school
-without touching any component.
+Built for **Northfield Academy**, a fictional independent K–12 school in Portland, Oregon, used
+here as realistic content. No UI framework and no component library — the design system is plain
+CSS custom properties. All copy, pricing, dates, and FAQ answers live in `src/data/content.js`
+and can be swapped for a real school without touching a component.
 
 ## Features
 
@@ -63,8 +64,8 @@ and publishes `dist/` to GitHub Pages. Pages is already configured to use the wo
 source, so a push is all it takes.
 
 1. `git push`
-2. Watch the run in the [Actions tab](https://github.com/kingabse192-web/northfield-academy-enroll/actions/workflows/deploy.yml).
-3. The site updates at https://kingabse192-web.github.io/northfield-academy-enroll/
+2. Watch the run in the [Actions tab](https://github.com/kingabse192-web/abdsalew-portfolio/actions/workflows/deploy.yml).
+3. The site updates at https://kingabse192-web.github.io/abdsalew-portfolio/
 
 The Vite config sets `base: './'`, so the project-site URL works without further changes.
 
