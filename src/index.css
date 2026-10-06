@@ -1,0 +1,178 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 4rem;
+  }
+
+  body {
+    @apply bg-void text-fg font-mono antialiased;
+    font-variant-ligatures: none;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    @apply bg-phos text-void;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-phos ring-offset-2 ring-offset-void;
+  }
+
+  /* Chrome, autocomplete and number inputs styled as terminal fields */
+  input,
+  textarea,
+  select {
+    @apply bg-raised border border-line text-fg rounded-sm;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    @apply text-dim;
+  }
+}
+
+@layer components {
+  /* ---- CRT overlay: scanlines + vignette + sweep, purely decorative ---- */
+  .crt::before {
+    content: '';
+    @apply pointer-events-none fixed inset-0 z-[100];
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0px,
+      rgba(0, 0, 0, 0) 2px,
+      rgba(0, 0, 0, 0.16) 3px,
+      rgba(0, 0, 0, 0.16) 4px
+    );
+    mix-blend-mode: multiply;
+  }
+
+  .crt::after {
+    content: '';
+    @apply pointer-events-none fixed inset-0 z-[99];
+    background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.55) 100%);
+  }
+
+  /* ---- window chrome shared by every terminal-framed block ---- */
+  .win {
+    @apply border border-line bg-panel shadow-panel;
+  }
+
+  .win__bar {
+    @apply flex items-center gap-2 border-b border-line-soft bg-raised px-3 py-2;
+  }
+
+  .win__dot {
+    @apply h-2.5 w-2.5 rounded-full;
+  }
+
+  .win__title {
+    @apply ml-2 text-2xs uppercase tracking-terminal text-dim;
+  }
+
+  /* ---- type helpers ---- */
+  .label {
+    @apply text-2xs uppercase tracking-terminal text-muted;
+  }
+
+  .accent {
+    @apply text-phos;
+  }
+
+  .glow {
+    text-shadow:
+      0 0 8px var(--tw-shadow-color, rgba(201, 242, 77, 0.5)),
+      0 0 28px rgba(201, 242, 77, 0.18);
+  }
+
+  /* Inline prompt used by the CLI and anywhere we echo a command */
+  .prompt {
+    @apply select-none text-phos;
+  }
+
+  .caret::after {
+    content: '';
+    @apply ml-0.5 inline-block h-[1.1em] w-[0.5ch] translate-y-[0.18em] bg-phos;
+    animation: blink 1.05s steps(1) infinite;
+  }
+
+  /* ---- buttons ---- */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 border px-4 py-2 text-sm
+           transition-colors duration-100 select-none;
+  }
+
+  .btn--primary {
+    @apply btn border-phos bg-phos font-semibold text-void
+           hover:bg-transparent hover:text-phos hover:shadow-phos-sm
+           active:translate-y-px;
+  }
+
+  .btn--ghost {
+    @apply btn border-line bg-transparent text-fg
+           hover:border-phos hover:text-phos;
+  }
+
+  .btn--bare {
+    @apply border-0 bg-transparent px-0 text-phos underline underline-offset-4
+           hover:text-fg hover:underline;
+  }
+
+  /* ---- section rhythm ---- */
+  .section {
+    @apply mx-auto w-full max-w-6xl px-5 py-20 sm:px-8 sm:py-28;
+  }
+
+  .rule {
+    @apply h-px w-full bg-line;
+  }
+
+  /* Hide scrollbar on the horizontal chip rails while keeping it scrollable */
+  .no-bar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .no-bar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer utilities {
+  .grid-lines {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  .fade-in {
+    animation: riseIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .crt::before,
+  .crt::after {
+    display: none;
+  }
+}

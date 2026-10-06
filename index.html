@@ -3,23 +3,52 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#12362a" />
-    <title>Admissions · Northfield Academy — Fall 2027</title>
+    <meta name="theme-color" content="#0a0b0d" />
+    <meta name="color-scheme" content="dark" />
+
+    <title>Absalew — Full-stack &amp; systems engineer</title>
     <meta
       name="description"
-      content="Northfield Academy is an independent K–12 school in Southeast Portland. Applications for Fall 2027 are open — explore programs, tuition and financial aid, and apply online in about twelve minutes."
+      content="Absalew is a full-stack and systems engineer based in Addis Ababa, Ethiopia. React, TypeScript, Node, Docker and Linux — with a terminal you can actually type into."
     />
+    <meta name="author" content="Absalew" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Absalew — Full-stack &amp; systems engineer" />
+    <meta
+      property="og:description"
+      content="Full-stack web apps on React, services on Node, and the Linux and container plumbing underneath both."
+    />
+    <meta name="twitter:card" content="summary" />
+
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="canonical" href="https://kingabse192-web.github.io/abdsalew-portfolio/" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300..700;1,400..500&family=Space+Grotesk:wght@500..700&display=swap"
       rel="stylesheet"
     />
+
+    <style>
+      /* Painted before the bundle loads, so there is no white flash. */
+      html,
+      body {
+        margin: 0;
+        background: #0a0b0d;
+        color: #d6dae0;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <noscript>
+      <p style="padding: 2rem; font-family: monospace; color: #c9f24d">
+        This portfolio needs JavaScript. The source is at
+        github.com/kingabse192-web/abdsalew-portfolio
+      </p>
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
